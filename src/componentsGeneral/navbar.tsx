@@ -7,10 +7,10 @@ const Navbar: React.FC = () => {
         <nav className="navbar">
             <ul className="navbar-list">
                 <li className="navbar-item">
-                    <Link to="/store-items">Store Items</Link>
+                    <Link to="/item.tsx">Store Items</Link>
                 </li>
                 <li className="navbar-item">
-                    <Link to="/shopping-cart">Shopping Cart</Link>
+                    <Link to="/cart">Shopping Cart</Link>
                 </li>
                 <li className="navbar-item">
                     <Link to="/receipt">Receipt</Link>
