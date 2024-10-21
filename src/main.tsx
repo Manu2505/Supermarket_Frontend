@@ -1,13 +1,21 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import App from './App';
 import './index.css';
+import ShoppingCart from './pages/cart';
+import Receipt from './pages/receipt';
+import ItemPage from './pages/item';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Router>
       <App />
+        <Routes>
+          <Route path="/item" element={<ItemPage />} />
+          <Route path="/cart" element={<ShoppingCart />} />
+          <Route path="/receipt" element={<Receipt />} />
+        </Routes>
     </Router>
   </StrictMode>,
 );

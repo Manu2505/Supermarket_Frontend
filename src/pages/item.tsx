@@ -1,5 +1,5 @@
 import React from 'react';
-import SupermarketItem from '../componentsItem/supermarketItems.tsx';
+import SupermarketItem from '../componentsItem/supermarketItems';
 
 const ItemPage: React.FC = () => {
     return (
