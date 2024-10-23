@@ -4,3 +4,167 @@
   padding: 2rem;
   text-align: center;
 }
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f4;
+  color: #000000;
+  line-height: 1.6;
+}
+
+h1, h2 {
+  color: #4CAF50;
+  margin-bottom: 20px;
+}
+
+/* Container */
+.container {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 5px;
+  background-color: #fff;
+  color: black;
+}
+
+/* Button Styles */
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* List Styles (Cart and Receipt) */
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+/* Special Buttons for Cart Items */
+.cart-item button, 
+.receipt-item button {
+  background-color: #f44336;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cart-item button:hover, 
+.receipt-item button:hover {
+  background-color: #e53935;
+}
+
+/* Summary and Total Styles */
+.summary {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 2px solid #4CAF50;
+}
+
+.total {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: #333;
+  padding: 10px;
+}
+
+.navbar-list {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar-item a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.navbar-item a:hover {
+  background-color: #575757;
+  border-radius: 4px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .container {
+      width: 95%;
+  }
+
+  .summary {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .summary div {
+      margin-bottom: 10px;
+  }
+
+  li {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+}
