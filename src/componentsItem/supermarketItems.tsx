@@ -11,6 +11,7 @@ const SupermarketItems: React.FC = () => {
         console.log('Product:', product);
 
         fetch('http://localhost:8080/item', {
+            mode: 'no-cors',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(product),
