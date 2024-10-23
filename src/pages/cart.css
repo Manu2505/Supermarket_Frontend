@@ -1,0 +1,4 @@
+.cartGrid {
+    display: grid;
+    grid-column: 25% 75%;
+}
