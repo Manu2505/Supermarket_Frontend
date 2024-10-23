@@ -9,7 +9,7 @@ const ItemDisplay: React.FC = () => {
         items.push(data);
     }
 
-    const items: any = [{ name: "Item 1" }, { name: "Item 2" }];
+    const items: any = [{ name: "Item 1", price : "2,99"}, { name: "Item 2", price : "3,99"}];
 
     return (
         <div>
