@@ -1,19 +1,17 @@
 import React from "react";
-import InputItem from "./inputItem";
 
-const ItemList: React.FC = () => {
+interface ItemListProps {
+    items: any[];
+}
 
-    function addItemToList(data: any) {
-        console.log("data", data);
-        items.push(data);
-    }
-
-    const items = [];
-
+const ItemList: React.FC<ItemListProps> = ({ items }) => {
     return (
         <div>
-            <h1>Item List</h1>
-            <InputItem addItemToList={addItemToList} />
+            <ul>
+                {items.map((item, index) => (
+                    <li key={index}>{item.name}</li>
+                ))}
+            </ul>
         </div>
     );
 };
