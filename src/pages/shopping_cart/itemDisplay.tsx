@@ -1,6 +1,7 @@
 import React from "react";
 import InputItem from "./inputItem";
 import ItemList from "./itemList";
+import { getCartData } from "../../api/CartData";
 
 const ItemDisplay: React.FC = () => {
 
@@ -9,7 +10,7 @@ const ItemDisplay: React.FC = () => {
         items.push(data);
     }
 
-    const items: any = [{ name: "Item 1" }, { name: "Item 2" }];
+    const items: any = getCartData()
 
     return (
         <div>

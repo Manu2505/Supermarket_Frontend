@@ -1,13 +1,13 @@
 import React from 'react';
-import OptionsMenu from '../componentsCart/options';
-import ItemDisplay from '../componentsCart/itemDisplay';
-import PaymentOptions from '../componentsCart/paymentOption';
-import PriceLabel from '../componentsCart/priceLabel';
+import OptionsMenu from './options';
+import ItemDisplay from './itemDisplay';
+import PaymentOptions from './paymentOption';
+import PriceLabel from './priceLabel';
 import './cart.css';
 
 const ShoppingCart: React.FC = () => {
     return (
-        <div className='cartGrid'>
+        <div className='page-frame'>
             <OptionsMenu />
             <ItemDisplay />
             <PaymentOptions />
