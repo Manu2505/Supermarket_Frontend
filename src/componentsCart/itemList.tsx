@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface ItemListProps {
-  items: any[];
+    items: any[];
 }
 
 const ItemList: React.FC<ItemListProps> = ({ items: initialItems }) => {
