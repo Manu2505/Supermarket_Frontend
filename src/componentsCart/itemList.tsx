@@ -47,6 +47,19 @@ const ItemList: React.FC<ItemListProps> = ({ items: initialItems }) => {
     });
   }
 
+  const getItemsFromList = function getItemList(): any[] {
+    const receiptData = items.map((item, index) => {
+      const quantity = document.getElementById(index.toString()) as HTMLInputElement;
+      return {
+        name: item.name,
+        price: item.price,
+        quantity: quantity.value,
+        fullPrice: fullPrices[index],
+      };
+    });
+    return receiptData;
+  }
+  
   return (
     <div>
       <ol>
