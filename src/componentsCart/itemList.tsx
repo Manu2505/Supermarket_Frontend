@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface ItemListProps {
     items: any[];
@@ -47,7 +47,7 @@ const ItemList: React.FC<ItemListProps> = ({ items: initialItems }) => {
     });
   }
 
-  const getItemsFromList = function getItemList(): any[] {
+  function sendItemList(): any[] {
     const receiptData = items.map((item, index) => {
       const quantity = document.getElementById(index.toString()) as HTMLInputElement;
       return {

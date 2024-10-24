@@ -6,11 +6,20 @@ import PriceLabel from '../componentsCart/priceLabel';
 import './cart.css';
 
 const ShoppingCart: React.FC = () => {
+
+    function getItemList(): any[] {
+        const receiptData = sendItemList();
+    }
+
+interface retriveItemList {
+    getItemList: () => any[];
+}
+
     return (
         <div className='cartGrid'>
             <OptionsMenu />
             <ItemDisplay />
-            <PaymentOptions />
+            <PaymentOptions getItemList={getItemList} />
             <PriceLabel />
         </div>
         
