@@ -6,7 +6,7 @@ interface ItemListProps {
 
 const ItemList: React.FC<ItemListProps> = ({ items: initialItems }) => {
   const [items, setItems] = useState(initialItems);
-const [fullPrices, setFullPrices] = useState<number[]>(initialItems.map(item => parseFloat(item.price)));
+  const [fullPrices, setFullPrices] = useState<number[]>(initialItems.map(item => parseFloat(item.price)));
 
   function removeItem(index: number) {
     const newItems = [...items];
