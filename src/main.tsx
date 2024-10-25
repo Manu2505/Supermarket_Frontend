@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import App from './App';
 import './index.css';
-import ShoppingCart from './pages/cart';
+import ShoppingCart from './pages/shopping_cart/ShoppingCart';
 import Receipt from './pages/receipt';
 import ItemPage from './pages/item';
 

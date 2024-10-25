@@ -1,0 +1,39 @@
+.cartGrid {
+    display: grid;
+    grid-column: 25% 75%;
+}
+
+.row-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+.row-container:hover{
+    background-color: rgb(194, 229, 185);
+}
+
+input {
+    width: 60px;
+    text-align: center;
+    padding: 10px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide spinners in Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.counter-container{
+    width: 30%;
+    min-width: 200px;
+    display: flex;
+}
+.text-container{
+    flex-grow: 1;
+}

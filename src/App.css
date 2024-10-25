@@ -168,3 +168,9 @@ li:last-child {
       align-items: flex-start;
   }
 }
+
+.page-frame{
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+}
