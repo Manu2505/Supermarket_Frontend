@@ -29,7 +29,7 @@ function ItemRow(props: any) {
             <div className="text-container">
                 {item.name} {item.price} {getFullPrice()}
             </div>
-            <NumberChanger number={12} changeNumber={(n: any) => changeNumber(n)} />
+            <NumberChanger number={1} changeNumber={(n: any) => changeNumber(n)} />
         </div>
     )
 }
