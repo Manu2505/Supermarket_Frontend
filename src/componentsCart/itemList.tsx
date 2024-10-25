@@ -7,6 +7,7 @@ interface ItemListProps {
 const ItemList: React.FC<ItemListProps> = ({ items: initialItems }) => {
   const [items, setItems] = useState(initialItems);
   const [fullPrices, setFullPrices] = useState<number[]>(initialItems.map(item => parseFloat(item.price)));
+  const [fullItemLists, sendItemList] = useState<{ name: any; price: any; quantity: string; fullPrice: number; }[]>([]);
 
   function removeItem(index: number) {
     const newItems = [...items];
@@ -47,7 +48,7 @@ const ItemList: React.FC<ItemListProps> = ({ items: initialItems }) => {
     });
   }
 
-  function sendItemList(): any[] {
+  function createItemList() {
     const receiptData = items.map((item, index) => {
       const quantity = document.getElementById(index.toString()) as HTMLInputElement;
       return {
@@ -57,7 +58,7 @@ const ItemList: React.FC<ItemListProps> = ({ items: initialItems }) => {
         fullPrice: fullPrices[index],
       };
     });
-    return receiptData;
+    return sendItemList (receiptData);
   }
   
   return (
