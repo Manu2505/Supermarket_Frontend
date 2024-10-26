@@ -26,10 +26,9 @@ const InputItem: React.FC<InputItemProps> = ({ addItemToList }) => {
     }
   }
 
-  function addItemsToCart(itemId: String) {
-    fetch(`http://localhost:8080/items/${itemId}`,
+  function addItemsToCart(Id: String) {
+    fetch(`http://localhost:8080/items/${Id}`,
         {
-            mode: "no-cors",
             method: "GET",
             headers: {
             "Content-Type": "application/json",
