@@ -1,25 +1,23 @@
 import React from "react";
 
 interface InputItemProps {
-    addItemToList: (item: any) => void;
+  addItemToList: (item: any) => void;
 }
 
 const InputItem: React.FC<InputItemProps> = ({ addItemToList }) => {
-
-  function getItemById(event: React.KeyboardEvent<HTMLInputElement>) {
+  function getItemById() {
     try {
-      if (event.key === "Enter" && event.currentTarget.value === "") {
+      const inputElement = document.getElementById("input");
+      if (!inputElement) {
+        throw new Error("Input element not found");
+      }
+      const input = (inputElement as HTMLInputElement).value;
+      if (input === "") {
         alert("Please enter an item ID.");
         throw new Error("Please enter an item ID.");
-      }
-      if (event.key === "Enter") {
-        console.log(event.currentTarget.value);
-        addItemsToCart(event.currentTarget.value);
-      }
-      if (event.key === "Escape") {
-        event.currentTarget.value = "";
       } else {
-        return;
+        console.log(input);
+        addItemsToCart(input);
       }
     } catch (error) {
       console.error(error);
@@ -27,25 +25,25 @@ const InputItem: React.FC<InputItemProps> = ({ addItemToList }) => {
   }
 
   function addItemsToCart(Id: String) {
-    fetch(`http://localhost:8080/items/${Id}`,
-        {
-            method: "GET",
-            headers: {
-            "Content-Type": "application/json",
-            },
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            addItemToList(data);
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-        });
+    fetch(`http://localhost:8080/items/${Id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        addItemToList(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }
 
   return (
     <div>
-      <input type="number" onKeyUp={getItemById}></input>
+      <input type="text" id="input"></input>
+      <button onClick={() => getItemById()}>Add Item</button>
     </div>
   );
 };
