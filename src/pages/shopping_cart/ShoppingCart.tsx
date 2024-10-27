@@ -7,19 +7,13 @@ import './cart.css';
 
 const ShoppingCart: React.FC = () => {
 
-    function getItemList(): any[] {
-        const receiptData = sendItemList();
-    }
 
-interface retriveItemList {
-    getItemList: () => any[];
-}
 
     return (
         <div className='page-frame'>
             <OptionsMenu />
             <ItemDisplay />
-            <PaymentOptions getItemList={getItemList} />
+            <PaymentOptions />
             <PriceLabel />
         </div>
         

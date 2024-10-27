@@ -1,16 +1,14 @@
 import React from "react";
+import { getReceiptData } from "../../api/CartData";
 
-interface PaymentOptionsProps {
-  getItemList: () => any[];
-}
 
-const PaymentOptions: React.FC<PaymentOptionsProps> = ({ getItemList }) => {
+
+const PaymentOptions: React.FC = () => {
   function getReceipt() {
-    const receiptData = getItemList();
+    const receiptData = getReceiptData();
     console.log("receiptData", receiptData);
 
     fetch(`http://localhost:8080/receipt`, {
-      mode: "no-cors",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,6 +22,8 @@ const PaymentOptions: React.FC<PaymentOptionsProps> = ({ getItemList }) => {
       .catch((error) => {
         console.error("Error:", error);
       });
+
+      window.location.href = "/receipt";
   }
 
   return (

@@ -5,9 +5,12 @@ interface ItemListProps {
   items: any[];
 }
 
+export let receiptData: any[] = [];
+
 const ItemList: React.FC<ItemListProps> = ({ items: initialItems }) => {
 
   const [items, setItems] = useState(initialItems);
+  receiptData = items;
 
   function removeItem(index: number) {
     const newItems = [...items];
