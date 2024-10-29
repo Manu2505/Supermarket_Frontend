@@ -1,5 +1,5 @@
 import React from 'react';
-import { getReceiptData } from '../api/CartData';
+import { getReceiptData } from './shopping_cart/CartData';
 
 
 

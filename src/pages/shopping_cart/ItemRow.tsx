@@ -2,48 +2,45 @@ import { useEffect, useState } from "react";
 import NumberChanger from "../../components/NumberChanger";
 
 function ItemRow(props: any) {
+    const { removeItem, item } = props;
 
-    const { removeItem, item } = props
-
-    const [amount, setAmount] = useState(1)
+    const [amount, setAmount] = useState(1);
 
     useEffect(() => {
         if (item.amount) {
-            setAmount(item.amount)
+            setAmount(item.amount);
         }
-    }, [])
+    }, [item.amount]);
+
     function changeNumber(number: any) {
-        setAmount(number)
+        setAmount(number);
     }
 
     function getFullPrice() {
         if (item.price) {
-            return Math.floor(item.price * amount * 100) / 100
+            return (item.price * amount).toFixed(2); // Gesamtpreis auf zwei Dezimalstellen gerundet
         }
-        return -1
+        return -1;
     }
 
     return (
         <div className="row-container">
-            <button onClick={() => removeItem()}>Remove</button>
+            <button onClick={removeItem}>Remove</button>
             <div className="text-container">
-                {item.name} {item.price} {getFullPrice()}
+                {/* Reihenfolge: Name, Kategorie, Gesamtpreis */}
+                <div>
+                    <strong>Name:</strong> {item.name}
+                </div>
+                <div>
+                    <strong>Category:</strong> {item.category}
+                </div>
+                <div>
+                    <strong>Total Price:</strong> ${getFullPrice()}
+                </div>
             </div>
-            <NumberChanger number={1} changeNumber={(n: any) => changeNumber(n)} />
+            <NumberChanger number={amount} changeNumber={(n: any) => changeNumber(n)} />
         </div>
-    )
+    );
 }
-export default ItemRow
 
-/*
-        {items.map((item, index) => (
-          <li key={index}>
-            <button onClick={() => removeItem(index)}>Remove</button>
-            {item.name} {item.price} {fullPrices[index]}
-            <button onClick={() => quantityLowered(index)}>-</button>
-            <input id={index.toString()} type="number" defaultValue={"1"}></input>
-            <button onClick={() => quantityIncreased(index)}>+</button>
-          </li>
-        ))}
-
-*/
+export default ItemRow;

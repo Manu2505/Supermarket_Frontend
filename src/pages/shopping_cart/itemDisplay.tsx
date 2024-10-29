@@ -1,7 +1,7 @@
 import React from "react";
 import InputItem from "./inputItem";
 import ItemList from "./itemList";
-import { getCartData } from "../../api/CartData";
+import { getCartData } from "./CartData";
 
 
 
