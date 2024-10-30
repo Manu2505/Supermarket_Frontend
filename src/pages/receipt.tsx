@@ -15,18 +15,18 @@ const Receipt: React.FC = () => {
                     <tr>
                         <th style={{ textAlign: 'left', borderBottom: '2px solid #ccc', padding: '10px' }}>Name</th>
                         <th style={{ textAlign: 'center', borderBottom: '2px solid #ccc', padding: '10px' }}>Quantity</th>
-                        <th style={{ textAlign: 'right', borderBottom: '2px solid #ccc', padding: '10px' }}>Price per Unit (€)</th>
+                        <th style={{ textAlign: 'center', borderBottom: '2px solid #ccc', padding: '10px' }}>Price per Unit (€)</th>
                         <th style={{ textAlign: 'right', borderBottom: '2px solid #ccc', padding: '10px' }}>Total (€)</th>
                     </tr>
                 </thead>
                 <tbody>
                     {receiptData.map((item, index) => (
                         <tr key={index}>
-                            <td style={{ padding: '10px', borderBottom: '1px solid #ddd' }}>{item.name}</td>
+                            <td style={{ textAlign: 'left', padding: '10px', borderBottom: '1px solid #ddd' }}>{item.name}</td>
                             <td style={{ textAlign: 'center', padding: '10px', borderBottom: '1px solid #ddd' }}>
                                 {item.amount || 1}
                             </td>
-                            <td style={{ textAlign: 'right', padding: '10px', borderBottom: '1px solid #ddd' }}>{item.price.toFixed(2)}€</td>
+                            <td style={{ textAlign: 'center', padding: '10px', borderBottom: '1px solid #ddd' }}>{item.price.toFixed(2)}€</td>
                             <td style={{ textAlign: 'right', padding: '10px', borderBottom: '1px solid #ddd' }}>
                                 {(item.price * (item.amount || 1)).toFixed(2)}€
                             </td>
@@ -44,6 +44,6 @@ const Receipt: React.FC = () => {
             </table>
         </div>
     );
-};
+}    
 
 export default Receipt;
