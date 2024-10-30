@@ -28,7 +28,8 @@ const PaymentOptions: React.FC = () => {
 
   return (
     <div>
-      <button onClick={getReceipt}>Get your Receipt</button>
+      <button onClick={getReceipt}>Pay with card</button>
+      <button onClick={getReceipt}>Pay with cash</button>
     </div>
   );
 };

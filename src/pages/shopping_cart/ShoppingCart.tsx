@@ -14,7 +14,6 @@ const ShoppingCart: React.FC = () => {
             <OptionsMenu />
             <ItemDisplay />
             <PaymentOptions />
-            <PriceLabel />
         </div>
         
     );

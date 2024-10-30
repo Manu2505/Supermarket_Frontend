@@ -6,5 +6,5 @@ export function getCartData(){
 }
 
 export function getReceiptData(){
-    return receiptData
+    return receiptData;
 }

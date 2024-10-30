@@ -37,3 +37,7 @@ input[type="number"] {
 .text-container{
     flex-grow: 1;
 }
+
+button {
+    margin: 1em;
+}
