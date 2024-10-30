@@ -7,14 +7,17 @@ const PaymentOptions: React.FC = () => {
 
   function getReceipt() {
     const receiptData = getReceiptData();
+    const total = receiptData.reduce((acc, item) => acc + item.price * (item.amount || 1), 0);
     console.log("receiptData", receiptData);
+    console.log("total", total);
+    console.log(JSON.stringify({receiptData, total}));
 
     fetch(`http://localhost:8080/receipt`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(receiptData),
+      body: JSON.stringify({receiptData, total}),
     })
       .then((response) => response.json())
       .then((data) => {
