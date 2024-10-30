@@ -8,10 +8,8 @@ const ItemDisplay: React.FC = () => {
 
   function addItemToList(data: any) {
     console.log("data", data);
-    const newItems = [...items];
-    newItems.push(data);
-    setItems(newItems);
-    console.log("items", newItems);
+    // Füge das Item zur Liste hinzu, wenn die Menge aktualisiert wurde
+    setItems([...items]); // Update der Item-Liste
   }
 
   return (

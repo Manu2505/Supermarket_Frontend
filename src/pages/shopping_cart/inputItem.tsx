@@ -32,8 +32,19 @@ const InputItem: React.FC<InputItemProps> = ({ addItemToList }) => {
         return response.json();
       })
       .then((data) => {
-        addItemToList(data); // Füge das Item zur Liste hinzu
-        cartInputData.push(data); // Speichere das Item im cartInputData
+        // Überprüfe, ob das Item bereits in cartInputData vorhanden ist
+        const existingItem = cartInputData.find(item => item.id === data.id);
+
+        if (existingItem) {
+          // Wenn das Item bereits existiert, erhöhe die Menge um 1
+          existingItem.amount += 1; // Erhöhe die Anzahl des bestehenden Items
+        } else {
+          // Andernfalls füge das Item zur Liste hinzu mit amount: 1
+          data.amount = 1; // Setze die Anfangsanzahl auf 1
+          cartInputData.push(data); // Speichere das Item im cartInputData
+        }
+
+        addItemToList(data); // Füge das Item zur Liste hinzu (oder aktualisiere die bestehende Menge)
         setItemId(""); // Setze die Eingabe zurück
       })
       .catch((error) => {

@@ -17,8 +17,17 @@ function ItemRow(props: ItemRowProps) {
     }, [item.amount]);
 
     function changeNumber(number: number) {
-        setAmount(number);
-        updateAmount(number); // Menge aktualisieren
+
+        // Wenn die Menge 1 ist und der Benutzer auf den Minus-Button klickt, zeige eine Warnung an
+        if (number < 1) {
+            alert("The amount can not be equal to 0. Please use the *remove* button instead.");
+            return; // Stoppe die Funktion, damit die Menge nicht aktualisiert wird
+        }
+
+        // Setze die Menge auf den neuen Wert, der mindestens 1 sein muss
+        const newAmount = Math.max(number, 1);
+        setAmount(newAmount);
+        updateAmount(newAmount); // Menge aktualisieren
     }
 
     function getFullPrice() {
@@ -39,7 +48,12 @@ function ItemRow(props: ItemRowProps) {
                     <strong>Total Price:</strong> ${getFullPrice()}
                 </div>
             </div>
-            <NumberChanger number={amount} changeNumber={changeNumber} />
+            <div className="number-changer-container">
+                {/* Minus-Button immer anzeigen */}
+                <button onClick={() => changeNumber(amount - 1)}>-</button>
+                <span>{amount}</span> {/* Zeige die aktuelle Anzahl an */}
+                <button onClick={() => changeNumber(amount + 1)}>+</button>
+            </div>
         </div>
     );
 }
