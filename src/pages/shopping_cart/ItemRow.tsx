@@ -1,33 +1,34 @@
 import { useEffect, useState } from "react";
 import NumberChanger from "../../components/NumberChanger";
 
-function ItemRow(props: any) {
-    const { removeItem, item } = props;
+interface ItemRowProps {
+    item: any;
+    removeItem: () => void;
+    updateAmount: (newAmount: number) => void; // neue Funktion zum Aktualisieren der Menge
+}
 
-    const [amount, setAmount] = useState(1);
+function ItemRow(props: ItemRowProps) {
+    const { removeItem, item, updateAmount } = props;
+
+    const [amount, setAmount] = useState(item.amount || 1);
 
     useEffect(() => {
-        if (item.amount) {
-            setAmount(item.amount);
-        }
+        setAmount(item.amount || 1);
     }, [item.amount]);
 
-    function changeNumber(number: any) {
+    function changeNumber(number: number) {
         setAmount(number);
+        updateAmount(number); // Menge aktualisieren
     }
 
     function getFullPrice() {
-        if (item.price) {
-            return (item.price * amount).toFixed(2); // Gesamtpreis auf zwei Dezimalstellen gerundet
-        }
-        return -1;
+        return item.price ? (item.price * amount).toFixed(2) : "-";
     }
 
     return (
         <div className="row-container">
             <button onClick={removeItem}>Remove</button>
             <div className="text-container">
-                {/* Reihenfolge: Name, Kategorie, Gesamtpreis */}
                 <div>
                     <strong>Name:</strong> {item.name}
                 </div>
@@ -38,7 +39,7 @@ function ItemRow(props: any) {
                     <strong>Total Price:</strong> ${getFullPrice()}
                 </div>
             </div>
-            <NumberChanger number={amount} changeNumber={(n: any) => changeNumber(n)} />
+            <NumberChanger number={amount} changeNumber={changeNumber} />
         </div>
     );
 }

@@ -1,9 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { getReceiptData } from "./CartData";
 
-
-
 const PaymentOptions: React.FC = () => {
+  const navigate = useNavigate();
+
   function getReceipt() {
     const receiptData = getReceiptData();
     console.log("receiptData", receiptData);
@@ -18,12 +19,12 @@ const PaymentOptions: React.FC = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        // Weiterleitung zur /receipt-Seite und Übergabe der Daten im state
+        navigate("/receipt", { state: { receiptData: data } });
       })
       .catch((error) => {
         console.error("Error:", error);
       });
-
-      window.location.href = "/receipt";
   }
 
   return (
