@@ -12,7 +12,7 @@ const PaymentOptions: React.FC = () => {
     console.log("total", total);
     console.log(JSON.stringify({receiptData, total}));
 
-    fetch(`http://localhost:8080/receipt`, {
+    fetch(`http://localhost:8080/itemList`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
