@@ -7,7 +7,7 @@ interface InputItemProps {
 export let cartInputData: any[] = []; // Array, um hinzugefügte Items zu speichern
 
 const InputItem: React.FC<InputItemProps> = ({ addItemToList }) => {
-  const [itemId, setItemId] = useState<string>(""); // Lokaler Zustand für die ID
+  const [itemId, setItemId] = useState<string>("");
 
   function getItemById() {
     if (!itemId) {
@@ -32,14 +32,11 @@ const InputItem: React.FC<InputItemProps> = ({ addItemToList }) => {
         return response.json();
       })
       .then((data) => {
-        // Überprüfe, ob das Item bereits in cartInputData vorhanden ist
         const existingItem = cartInputData.find(item => item.id === data.id);
 
         if (existingItem) {
-          // Wenn das Item bereits existiert, erhöhe die Menge um 1
           existingItem.amount += 1; // Erhöhe die Anzahl des bestehenden Items
         } else {
-          // Andernfalls füge das Item zur Liste hinzu mit amount: 1
           data.amount = 1; // Setze die Anfangsanzahl auf 1
           cartInputData.push(data); // Speichere das Item im cartInputData
         }
@@ -59,7 +56,7 @@ const InputItem: React.FC<InputItemProps> = ({ addItemToList }) => {
         type="text" 
         id="input" 
         value={itemId} 
-        onChange={(e) => setItemId(e.target.value)} // Setze den Zustand der Eingabe
+        onChange={(e) => setItemId(e.target.value)}
         placeholder="Enter item ID" 
       />
       <button onClick={getItemById}>Add Item</button>

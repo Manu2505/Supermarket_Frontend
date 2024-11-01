@@ -4,11 +4,15 @@ const SupermarketItems: React.FC = () => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
+    const [isBasic, setIsBasic] = useState<null | boolean>(null);
+
+    const isFormValid = (): boolean => {
+        return name.trim() !== '' && price.trim() !== '' && category.trim() !== '' && isBasic !== null;
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const product = { name, price, category };
-        console.log('Product:', product);
+        const product = { name, price: parseFloat(price), category, isBasic };
 
         fetch('http://localhost:8080/item', {
             method: 'POST',
@@ -21,6 +25,7 @@ const SupermarketItems: React.FC = () => {
                 setName('');
                 setPrice('');
                 setCategory('');
+                setIsBasic(null);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -58,7 +63,30 @@ const SupermarketItems: React.FC = () => {
                         onChange={(e) => setCategory(e.target.value)}
                     />
                 </div>
-                <button type="submit">Add Product</button>
+                <div style={{ marginTop: '10px' }}>
+                    <label>Is this a basic food item?</label>
+                        <input
+                            type="radio"
+                            id="basic-yes"
+                            name="isBasic"
+                            value="true"
+                            checked={isBasic === true}
+                            onChange={() => setIsBasic(true)}
+                        />
+                        <label htmlFor="basic-yes">Yes</label>
+                        <input
+                            type="radio"
+                            id="basic-no"
+                            name="isBasic"
+                            value="false"
+                            checked={isBasic === false}
+                            onChange={() => setIsBasic(false)}
+                        />
+                        <label htmlFor="basic-no">No</label>
+                </div>
+                <button type="submit" disabled={!isFormValid()} style={{ marginTop: '20px' }}>
+                    Add Product
+                </button>
             </form>
         </div>
     );
