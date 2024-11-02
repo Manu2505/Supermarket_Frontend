@@ -22,7 +22,7 @@ const PaymentOptions: React.FC = () => {
       amount: item.amount || 1,
     }));
 
-    const totalPrice = receiptData.reduce((acc, item) => acc + item.price * (item.amount || 1), 0);
+    const totalPrice = receiptData.reduce((acc, item) => acc + (item.price * (item.amount || 1) * ((100 + item.taxRate) / 100)), 0);
 
     
       
