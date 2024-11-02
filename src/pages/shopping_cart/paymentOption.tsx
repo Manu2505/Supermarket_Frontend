@@ -7,17 +7,38 @@ const PaymentOptions: React.FC = () => {
 
   function getReceipt() {
     const receiptData = getReceiptData();
-    const total = receiptData.reduce((acc, item) => acc + item.price * (item.amount || 1), 0);
-    console.log("receiptData", receiptData);
-    console.log("total", total);
-    console.log(JSON.stringify({receiptData, total}));
+    const itemPositions = receiptData.map((item) => 
+    ({
+      item: {
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        category: item.category,
+        taxRate: item.taxRate,
+        basic: item.basic,
+      },
+      amount: item.amount || 1,
+    }));
+    const amountList = receiptData.map((item) => ({
+      amount: item.amount || 1,
+    }));
+    const totalPrice = receiptData.reduce((acc, item) => acc + item.price * (item.amount || 1), 0);
+
+    
+      
+      console.log("receiptData", receiptData);
+      console.log("itemPositions", itemPositions);
+      console.log("amountList", amountList);
+      console.log("itemPositions", itemPositions);
+      console.log("total", totalPrice);
+      console.log(JSON.stringify({itemPositions, totalPrice}));
 
     fetch(`http://localhost:8080/itemList`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({receiptData, total}),
+      body: JSON.stringify({itemPositions, totalPrice}),
     })
       .then((response) => response.json())
       .then((data) => {
