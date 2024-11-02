@@ -7,6 +7,8 @@ const PaymentOptions: React.FC = () => {
 
   function getReceipt() {
     const receiptData = getReceiptData();
+
+    // Digestable for Backend
     const itemPositions = receiptData.map((item) => 
     ({
       item: {
@@ -19,16 +21,12 @@ const PaymentOptions: React.FC = () => {
       },
       amount: item.amount || 1,
     }));
-    const amountList = receiptData.map((item) => ({
-      amount: item.amount || 1,
-    }));
+
     const totalPrice = receiptData.reduce((acc, item) => acc + item.price * (item.amount || 1), 0);
 
     
       
       console.log("receiptData", receiptData);
-      console.log("itemPositions", itemPositions);
-      console.log("amountList", amountList);
       console.log("itemPositions", itemPositions);
       console.log("total", totalPrice);
       console.log(JSON.stringify({itemPositions, totalPrice}));
