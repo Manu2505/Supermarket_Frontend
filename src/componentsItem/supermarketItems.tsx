@@ -4,15 +4,15 @@ const SupermarketItems: React.FC = () => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
-    const [isBasic, setIsBasic] = useState<null | boolean>(null);
+    const [isReduced, setIsReduced] = useState<null | boolean>(null);
 
     const isFormValid = (): boolean => {
-        return name.trim() !== '' && price.trim() !== '' && category.trim() !== '' && isBasic !== null;
+        return name.trim() !== '' && price.trim() !== '' && category.trim() !== '' && isReduced !== null;
     };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const product = { name, price: parseFloat(price), category, isBasic };
+        const product = { name, price: parseFloat(price), category, isReduced };
 
         fetch('http://localhost:8080/item', {
             method: 'POST',
@@ -25,7 +25,7 @@ const SupermarketItems: React.FC = () => {
                 setName('');
                 setPrice('');
                 setCategory('');
-                setIsBasic(null);
+                setIsReduced(null);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -70,8 +70,8 @@ const SupermarketItems: React.FC = () => {
                             id="basic-yes"
                             name="isBasic"
                             value="true"
-                            checked={isBasic === true}
-                            onChange={() => setIsBasic(true)}
+                            checked={isReduced === true}
+                            onChange={() => setIsReduced(true)}
                         />
                         <label htmlFor="basic-yes">Yes</label>
                         <input
@@ -79,8 +79,8 @@ const SupermarketItems: React.FC = () => {
                             id="basic-no"
                             name="isBasic"
                             value="false"
-                            checked={isBasic === false}
-                            onChange={() => setIsBasic(false)}
+                            checked={isReduced === false}
+                            onChange={() => setIsReduced(false)}
                         />
                         <label htmlFor="basic-no">No</label>
                 </div>
