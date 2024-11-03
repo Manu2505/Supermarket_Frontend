@@ -3,6 +3,7 @@ import { getReceiptData } from './shopping_cart/CartData';
 
 const Receipt: React.FC = () => {
     const [cashier, setCashier] = useState<string>('');
+    const [isReceiptSent, setIsReceiptSent] = useState<boolean>(false); // Neuer State für den Status
     const receiptData = getReceiptData();
 
     // Gesamtsumme inklusive Steuern berechnen
@@ -75,6 +76,7 @@ const Receipt: React.FC = () => {
     
             if (response.ok) {
                 console.log('Receipt data sent successfully!');
+                setIsReceiptSent(true); // Setze isReceiptSent auf true, wenn erfolgreich gesendet
             } else {
                 console.error('Failed to send receipt data', await response.text());
             }
@@ -86,10 +88,10 @@ const Receipt: React.FC = () => {
 
     // Send receipt data when cashier and receiptdata is available
     useEffect(() => {
-        if (cashier && receiptData.length > 0) {
+        if (cashier && receiptData.length > 0 && !isReceiptSent) {
             sendReceiptToBackend();
         }
-    }, [cashier, receiptData]);
+    }, [cashier, receiptData, isReceiptSent]);
     
 
     return (
