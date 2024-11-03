@@ -6,6 +6,7 @@ import './index.css';
 import ShoppingCart from './pages/shopping_cart/ShoppingCart';
 import Receipt from './pages/receipt';
 import ItemPage from './pages/item';
+import PrintItemLabelPage from './pages/printItemLabel';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')!).render(
       <App />
         <Routes>
           <Route path="/item" element={<ItemPage />} />
+          <Route path="/printItemLabel" element={<PrintItemLabelPage />} />
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/receipt" element={<Receipt />} />
         </Routes>
