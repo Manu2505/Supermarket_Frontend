@@ -36,25 +36,28 @@ const Receipt: React.FC = () => {
 
     const sendReceiptToBackend = async () => {
         // Umwandlung der receiptData in das richtige Format für die ItemList
-        const items = receiptData.map(item => {
-            const quantity = item.amount || 1; // Anzahl des Artikels
-            const price = item.price; // Preis pro Artikel
-            const taxRate = item.taxRate || 0; // Steuer in Prozent
-    
-            return {
+        const itemPositions = receiptData.map((item) => 
+            ({
+              item: {
+                id: item.id,
                 name: item.name,
-                quantity: quantity,
-                price: price,
-                taxRate: taxRate,
-            };
-        });
+                price: item.price,
+                category: item.category,
+                taxRate: item.taxRate,
+                basic: item.basic,
+              },
+              amount: item.amount || 1,
+            }));
+        
+            const totalPrice = receiptData.reduce((acc, item) => acc + (item.price * (item.amount || 1) * ((100 + item.taxRate) / 100)), 0);
     
         const receiptPayload = {
             date,
             time,
             cashier,
             itemList: {
-                items: items // Hier Items zur ItemList hinzufügen
+                itemPositions: itemPositions,
+                totalPrice, // Hier Items zur ItemList hinzufügen
             }
         };
     
