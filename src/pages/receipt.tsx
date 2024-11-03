@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { getReceiptData } from './shopping_cart/CartData';
 
 const Receipt: React.FC = () => {
-    const [cashier, setCashier] = useState<string>('');
+    const cashier = "Bob Ross"; // Festgelegter Cashier-Name
     const [isReceiptSent, setIsReceiptSent] = useState<boolean>(false); // Neuer State für den Status
     const receiptData = getReceiptData();
 
@@ -10,59 +10,38 @@ const Receipt: React.FC = () => {
     const total = receiptData.reduce((acc, item) => {
         const quantity = item.amount || 1;
         const taxAmount = item.price * (item.taxRate || 0) / 100 * quantity;
-        const totalWithTax = item.price * quantity + taxAmount;
-        return acc + totalWithTax;
+        return acc + item.price * quantity + taxAmount;
     }, 0);
 
     const currentDate = new Date();
     const date = currentDate.toISOString().split('T')[0];
     const time = currentDate.toTimeString().split(' ')[0];
 
-    useEffect(() => {
-        const fetchCashiers = async () => {
-            try {
-                const response = await fetch('/cashiers.json');
-                if (!response.ok) throw new Error('Failed to load cashiers data');
-                const cashiers = await response.json();
-
-                const randomCashier = cashiers[Math.floor(Math.random() * cashiers.length)];
-                setCashier(randomCashier.name);
-            } catch (error) {
-                console.error('Error loading cashiers:', error);
-            }
-        };
-
-        fetchCashiers();
-    }, []);
-
     const sendReceiptToBackend = async () => {
-        // Umwandlung der receiptData in das richtige Format für die ItemList
-        const itemPositions = receiptData.map((item) => 
-            ({
-              item: {
+        const itemPositions = receiptData.map((item) => ({
+            item: {
                 id: item.id,
                 name: item.name,
                 price: item.price,
                 category: item.category,
                 taxRate: item.taxRate,
-                basic: item.basic,
-              },
-              amount: item.amount || 1,
-            }));
+                reduced: item.reduced,
+            },
+            amount: item.amount || 1,
+        }));
         
-            const totalPrice = receiptData.reduce((acc, item) => acc + (item.price * (item.amount || 1) * ((100 + item.taxRate) / 100)), 0);
-    
+        const totalPrice = total; // Berechnung der Gesamtsumme kann direkt verwendet werden.
+
         const receiptPayload = {
             date,
             time,
             cashier,
             itemList: {
-                itemPositions: itemPositions,
-                totalPrice, // Hier Items zur ItemList hinzufügen
+                itemPositions,
+                totalPrice,
             }
         };
-    
-        // Debug: Ausgabe der JSON, die gesendet wird
+
         console.log("Sending Receipt Payload:", JSON.stringify(receiptPayload, null, 2));
     
         try {
@@ -76,7 +55,7 @@ const Receipt: React.FC = () => {
     
             if (response.ok) {
                 console.log('Receipt data sent successfully!');
-                setIsReceiptSent(true); // Setze isReceiptSent auf true, wenn erfolgreich gesendet
+                setIsReceiptSent(true); // Setzen des Status nach erfolgreichem Senden
             } else {
                 console.error('Failed to send receipt data', await response.text());
             }
@@ -84,15 +63,12 @@ const Receipt: React.FC = () => {
             console.error('Error:', error);
         }
     };
-    
 
-    // Send receipt data when cashier and receiptdata is available
-    useEffect(() => {
-        if (cashier && receiptData.length > 0 && !isReceiptSent) {
+    const handleSendReceipt = () => {
+        if (receiptData.length > 0 && !isReceiptSent) {
             sendReceiptToBackend();
         }
-    }, [cashier, receiptData, isReceiptSent]);
-    
+    };
 
     return (
         <div style={{ maxWidth: '600px', margin: '0 auto', fontFamily: 'Arial, sans-serif' }}>
@@ -141,6 +117,16 @@ const Receipt: React.FC = () => {
                     </tr>
                 </tbody>
             </table>
+
+            <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                <button
+                    onClick={handleSendReceipt}
+                    disabled={isReceiptSent}
+                    style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer' }}
+                >
+                    {isReceiptSent ? 'Receipt Sent!' : 'Send Receipt'}
+                </button>
+            </div>
         </div>
     );
 }
